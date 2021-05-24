@@ -1,0 +1,20 @@
+name: postgresql
+display-name: PostgreSQL
+summary: A containerized PostgreSQL charm built in the Lucky Charming Framework.
+maintainer: Opax <opax@katharostech.com>
+description: |
+  A containerized PostgreSQL charm built in the Lucky Charming Framework.
+tags:
+  # Replace "misc" with one or more whitelisted tags from this list:
+  # https://jujucharms.com/docs/stable/authors-charm-metadata
+  - misc
+subordinate: false
+provides:
+  provides-relation:
+    interface: interface-name
+requires:
+  requires-relation:
+    interface: interface-name
+peers:
+  peer-relation:
+    interface: interface-name
