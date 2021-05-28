@@ -1,15 +1,32 @@
 # These are config values that users can set from the GUI or the commandline
 options:
-  name:
+  POSTGRES_DOCKER_TAG:
     type: string
-    default: John
-    description: The name of something
-  enable-something:
-    type: boolean
-    default: False
-    description: Whether or not to enable something
-  count:
-    type: int
-    default: 100
-    description: How much of something
-
+    default: "latest"
+    description: >
+      This charm pulls the Docker image for PostgreSQL from Docker Hub. This
+      required setting sets the Tag to be used when deploying this charm. Any
+      valid tag which is defined in Docker Hub in the official PostgreSQL repo,
+      can be provided here. By default the 'latest' tag will be used.
+      Official repo: https://hub.docker.com/_/postgres
+  POSTGRES_PASSWORD:
+    type: string
+    default: "changeme"
+    description: >
+      This required setting sets the superuser password for PostgreSQL. 
+      The default superuser is defined by the 'POSTGRES_USER' option.
+  POSTGRES_USER:
+    type: string
+    default: ""
+    description: >
+      This option can be used in conjunction with 'POSTGRES_PASSWORD' 
+      to set a user and its password. This option will create the specified 
+      user with superuser power and a database with the same name. If it is 
+      not specified, then the default user of 'postgres' will be used.
+  POSTGRES_DB:
+    type: string
+    default: ""
+    description: >
+      This option can be used to define a different name for the default 
+      database that is created when the image is first started. If it is not 
+      specified, then the value of 'POSTGRES_USER' will be used.
