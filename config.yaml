@@ -11,10 +11,13 @@ options:
       Official repo: https://hub.docker.com/_/postgres
   POSTGRES_PASSWORD:
     type: string
-    default: "changeme"
+    default: ""
     description: >
-      This required setting sets the superuser password for PostgreSQL. 
-      The default superuser is defined by the 'POSTGRES_USER' option.
+      This option sets the superuser password for PostgreSQL. It is recommended
+      to leave this option blank as the default will be a random generated
+      password that is shared strictly between a related charm. Use this option
+      when you need to know the password. The default superuser is defined by the 
+      'POSTGRES_USER' option.
   POSTGRES_USER:
     type: string
     default: ""

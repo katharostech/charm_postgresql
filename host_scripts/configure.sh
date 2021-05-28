@@ -13,10 +13,7 @@ pgtag=$(lucky get-config POSTGRES_DOCKER_TAG)
 if [ -z $pgtag ]; then lucky set-status -n config-status blocked \
   "Config required: 'POSTGRES_DOCKER_TAG'"; exit 0; 
 fi
-pgpass=$(lucky get-config POSTGRES_PASSWORD)
-if [ -z $pgpass ]; then lucky set-status -n config-status blocked \
-  "Config required: 'POSTGRES_PASSWORD'"; exit 0; 
-fi
+pgpass="$(get_password)"
 pguser=$(lucky get-config POSTGRES_USER)
 pgdb=$(lucky get-config POSTGRES_DB)
 
@@ -27,8 +24,12 @@ lucky container image set "postgres:${pgtag}"
 lucky container volume add pgdata /var/lib/postgresql/data
 
 # Load container env vars with config settings
-lucky container env set \
-  "POSTGRES_PASSWORD=${pgpass}"
+if [ -n $pgpass ]; then
+  lucky container env set \
+    "POSTGRES_PASSWORD=${pgpass}"
+else
+  lucky container env set
+fi
 if [ -n $pguser ]; then
   lucky container env set \
     "POSTGRES_USER=${pguser}"
