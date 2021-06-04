@@ -12,5 +12,5 @@ series:
   - focal
 provides:
   db:
-    interface: pgsql
+    interface: ez-pgsql
 subordinate: false
